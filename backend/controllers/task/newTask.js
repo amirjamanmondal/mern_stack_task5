@@ -1,5 +1,5 @@
-import TaskModel from "../../models/TaskModel";
-import taskValidator from "../../schemaValidator/task.schemaValidator";
+import TaskModel from "../../models/TaskModel.js";
+import taskValidator from "../../schemaValidator/task.schemaValidator.js";
 
 async function NewTask(req, res) {
   try {

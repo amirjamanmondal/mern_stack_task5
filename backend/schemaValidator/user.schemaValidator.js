@@ -4,8 +4,8 @@ const userValidator = z.object({
   name: z
     .string()
     .min(5, { message: "atleast 5 character required" })
-    .optional()
-    .trim(),
+    .trim()
+    .optional(),
   username: z
     .string()
     .min(5, { message: "atleast 5 character required" })

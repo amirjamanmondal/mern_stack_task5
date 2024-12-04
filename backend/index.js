@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import passport from "passport";
 import initializePassport from "./helpers/passportCongig.js";
+import userRouter from "./router/user.router.js";
 
 const app = express();
 dotenv.config();
@@ -45,6 +46,8 @@ app.use(
 );
 
 initializePassport(passport);
+
+app.use("/user", userRouter);
 
 const port = process.env.PORT || 5000;
 

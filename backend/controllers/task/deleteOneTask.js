@@ -1,10 +1,10 @@
-import TaskModel from "../../models/TaskModel";
+import TaskModel from "../../models/TaskModel.js";
 import mongoose from "mongoose";
 
 async function deleteOneTask(req, res) {
   try {
     const id = req.params.id;
-    
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ message: "Invalid task ID." });
     }

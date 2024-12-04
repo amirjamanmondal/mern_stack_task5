@@ -1,5 +1,6 @@
-import TaskModel from "../../models/TaskModel";
-import taskValidator from "../../schemaValidator/task.schemaValidator";
+import TaskModel from "../../models/TaskModel.js";
+import taskValidator from "../../schemaValidator/task.schemaValidator.js";
+import mongoose from "mongoose";
 
 async function markAsImportantTask(req, res) {
   try {
@@ -8,7 +9,8 @@ async function markAsImportantTask(req, res) {
       return res.status(400).json({ message: "Invalid task ID." });
     }
 
-    const isDone = taskValidator.parse(req.body);
+    const isDonePayload = { isDone: req.body.isDone };
+    const { isDone } = taskValidator.parse(isDonePayload);
 
     const mark = await TaskModel.findByIdAndUpdate(
       id,
@@ -19,7 +21,7 @@ async function markAsImportantTask(req, res) {
       }
     );
 
-    res.status(204).end();
+    res.status(200).json({ mark });
   } catch (error) {
     console.log("Internal server error during mark the task", error);
     res

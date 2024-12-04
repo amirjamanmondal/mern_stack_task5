@@ -4,9 +4,9 @@ function Logout(req, res, next) {
       return res.send({ message: "Please login..." });
     }
 
-    req.logOut((error) => {
+    req.logOut((err) => {
       if (err) {
-        return next(error);
+        return next(err);
       }
       res.send({ message: "Logout Successfully" });
     });

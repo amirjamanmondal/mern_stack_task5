@@ -1,5 +1,6 @@
-import TaskModel from "../../models/TaskModel";
-import taskValidator from "../../schemaValidator/task.schemaValidator";
+import TaskModel from "../../models/TaskModel.js";
+import taskValidator from "../../schemaValidator/task.schemaValidator.js";
+import mongoose from "mongoose";
 
 async function updateOneTask(req, res) {
   try {
@@ -20,7 +21,7 @@ async function updateOneTask(req, res) {
     if (!updatedTask)
       return res.status(404).json({ message: "Update task failed!" });
 
-    res.json(200).json({ message: "Task Updated Successfully", updatedTask });
+    res.status(200).json({ message: "Task Updated Successfully", updatedTask });
   } catch (error) {
     console.log("Internal Error during update task", error);
     res.status(500).json({ message: "Internal Error during update task!" });

@@ -1,4 +1,4 @@
-import TaskModel from "../../models/TaskModel";
+import TaskModel from "../../models/TaskModel.js";
 
 async function GetOneTask(req, res) {
   try {
@@ -6,7 +6,7 @@ async function GetOneTask(req, res) {
 
     const task = await TaskModel.findById(id);
 
-    if (!task) return res.status(404).json({ message: "Task List is Empty" });
+    if (!task) return res.status(404).json({ message: "Task  is not found!" });
 
     res.status(200).json(task);
   } catch (error) {

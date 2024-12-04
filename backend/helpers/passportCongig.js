@@ -40,7 +40,7 @@ const initializePassport = (passport) => {
 
   passport.deserializeUser(async (id, done) => {
     try {
-      const user = await User.findById(id);
+      const user = await UserModel.findById(id);
       if (!user) {
         return done(null, false, { message: "User not Exist" });
       }
