@@ -1,7 +1,6 @@
 import LocalStrategy from "passport-local";
 import bcrypt from "bcrypt";
-import User from "../models/UserModel";
-
+import UserModel from "../models/UserModel.js";
 
 const initializePassport = (passport) => {
   passport.use(
@@ -9,7 +8,7 @@ const initializePassport = (passport) => {
       { usernameField: "username", passwordField: "password" },
       async (username, password, done) => {
         try {
-          const user = await User.findOne({ username });
+          const user = await UserModel.findOne({ username });
           if (!user) {
             return done(null, false, {
               message: "User not found or Invalid Username",

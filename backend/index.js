@@ -5,7 +5,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import passport from "passport";
-// import initializePassport from "./passport-config/passportConfig.js";
+import initializePassport from "./helpers/passportCongig.js";
 
 const app = express();
 dotenv.config();
@@ -35,14 +35,16 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(passport.initialize());
-app.use(passport.session({
+app.use(
+  passport.session({
     secret: process.env.SESSION_SECRET || "your_secret_key",
     resave: false,
     saveUninitialized: false,
     cookie: { maxAge: 4 * 60 * 60 * 1000 },
-}));
+  })
+);
 
-// initializePassport(passport);
+initializePassport(passport);
 
 const port = process.env.PORT || 5000;
 

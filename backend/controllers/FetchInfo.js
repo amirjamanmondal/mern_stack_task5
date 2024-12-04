@@ -1,6 +1,4 @@
-import User from "../models/UserModel";
-
-function FethcInfo(req, res) {
+function FetchInfo(req, res) {
   try {
     if (!req.isAuthenticated()) {
       return res.send({ message: "Please login..." });
@@ -12,4 +10,4 @@ function FethcInfo(req, res) {
   }
 }
 
-export default FethcInfo;
+export default FetchInfo;
