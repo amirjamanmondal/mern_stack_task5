@@ -10,6 +10,7 @@ import updateOneTask from "../controllers/task/updateOneTask.js";
 import markAsImportantTask from "../controllers/task/markAsImportantTask.js";
 import deleteOneTask from "../controllers/task/deleteOneTask.js";
 import getAllTask from "../controllers/task/getAllTask.js";
+import deleteSelectedTask from "../controllers/task/deleteSelectedTask.js";
 
 const userRouter = express.Router();
 
@@ -39,6 +40,7 @@ userRouter.post("/tasks/mark/:id", isAuthenticated, markAsImportantTask);
 
 // params.id
 userRouter.delete("/tasks/delete/:id", isAuthenticated, deleteOneTask);
+userRouter.delete("/tasks", isAuthenticated, deleteSelectedTask);
 
 // params.id
 userRouter.get("/task/:id", isAuthenticated, getOneTask);
