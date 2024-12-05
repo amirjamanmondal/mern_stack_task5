@@ -23,7 +23,7 @@ async function Signup(req, res) {
     if (user) {
       await user.save();
     }
-    res.status(201).json({ user });
+    res.status(201).json({ user,message:"Signup successful" });
   } catch (error) {
     res.status(500).json(error);
   }

@@ -36,7 +36,7 @@ userRouter.post("/tasks", isAuthenticated, newTask);
 userRouter.post("/tasks/update/:id", isAuthenticated, updateOneTask);
 
 // body.isDone , params.id
-userRouter.post("/tasks/mark/:id", isAuthenticated, markAsImportantTask);
+userRouter.patch("/tasks/mark/:id", isAuthenticated, markAsImportantTask);
 
 // params.id
 userRouter.delete("/tasks/delete/:id", isAuthenticated, deleteOneTask);

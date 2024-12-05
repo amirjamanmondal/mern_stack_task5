@@ -13,7 +13,7 @@ async function deleteOneTask(req, res) {
 
     if (!task) return res.status(404).json({ message: "Task is not found!" });
 
-    res.status(204).end();
+    res.status(200).json({message:"Task Deleted"});
   } catch (error) {
     console.log("Error during Task Delete", error);
     res.status(500).json({
