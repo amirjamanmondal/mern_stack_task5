@@ -23,16 +23,16 @@ const LoginUser = () => {
         { withCredentials: true }
       );
       console.log(res.data);
-      toast(res.data.message);
+      toast("Login Successful");
       setTimeout(() => {
-        navigate("/user");
+        navigate("/");
       }, 3000);
       localStorage.setItem("sid", res.data?.token);
     } catch (error) {
       console.error(error.message);
       toast(error.message);
     }
-    setEmail("");
+    setUsername("");
     setPassword("");
   };
   return (

@@ -50,7 +50,7 @@ const SignupUser = () => {
         name="name"
         id="name"
         placeholder="Enter your name"
-        className="w-2/3 border rounded-full py-2 pl-6"
+        className="w-2/3 border rounded-full py-2 pl-6 text-black"
       />
       <input
         value={username}
@@ -59,7 +59,7 @@ const SignupUser = () => {
         name="username"
         id="username"
         placeholder="Enter your Username"
-        className="w-2/3 border rounded-full py-2 pl-6"
+        className="w-2/3 border rounded-full py-2 pl-6 text-black"
       />
       <input
         value={password}
@@ -68,7 +68,7 @@ const SignupUser = () => {
         name="password"
         id="password"
         placeholder="Enter a Password"
-        className="w-2/3 border rounded-full py-2 pl-6"
+        className="w-2/3 border rounded-full py-2 pl-6 text-black"
       />
       <p className="w-2/3 flex gap-2">
         Already a user?{" "}
