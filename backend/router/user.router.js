@@ -29,6 +29,8 @@ userRouter.post(
 
 userRouter.get("/logout", isAuthenticated, Logout);
 
+userRouter.get("/profile", isAuthenticated, FetchInfo);
+
 // body.task
 userRouter.post("/tasks", isAuthenticated, newTask);
 
