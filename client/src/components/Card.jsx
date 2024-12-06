@@ -2,14 +2,16 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import gear from "../assets/gear.gif";
+import toast from "react-hot-toast";
 
 const Card = () => {
   const [tasks, setTasks] = useState(null);
   const [mark, setMark] = useState(false);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
+  const [tasksSelected, setTasksSelected] = useState([]);
   // Fetch tasks on mount
+  console.log(tasksSelected);
 
   const controller = new AbortController();
 
@@ -74,6 +76,42 @@ const Card = () => {
     }
   }
 
+  const handleCheckboxChange = (e, value) => {
+    const { checked } = e.target;
+
+    if (checked) {
+      // Add value to the array if checked
+      setTasksSelected((prev) => [...prev, value]);
+    } else {
+      // Remove value from the array if unchecked
+      console.log("removing : ", value);
+
+      setTasksSelected((prev) => prev.filter((item) => item !== value));
+      console.log(tasksSelected);
+    }
+    console.log(tasksSelected);
+  };
+
+  async function handleDeleteSelected(e) {
+    e.preventDefault();
+    try {
+      const res = await axios.delete(
+        `http://localhost:8080/user/tasks`,
+        { selectedId: tasksSelected },
+        {
+          withCredentials: true,
+        }
+      );
+      const data = res.data?.message;
+      toast(data);
+      setTasks((prevTasks) =>
+        prevTasks.filter((task) => !tasksSelected.includes(task._id))
+      );
+    } catch (error) {
+      console.log("Error in delete selected ", error);
+    }
+  }
+
   if (loading) {
     return (
       <div className="w-1/2 h-fit flex justify-center bg-white shadow-md shadow-slate-800 items-center gap-3 text-xl rounded-md border-2 p-2">
@@ -92,24 +130,42 @@ const Card = () => {
 
   return (
     <ul className="w-1/2 h-60 relative flex justify-start flex-col bg-white shadow-md shadow-slate-800 items-center gap-3 text-xl rounded-md border-2 px-2 pb-2  nobar overflow-y-scroll">
-      <button
-        className="w-full h-fit py-2 flex justify-end pr-2 hover:fill-green-500 "
-        onClick={() => {
-          fetchData(), setLoading(true);
-        }}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          x="0px"
-          y="0px"
-          width="30"
-          height="30"
-          viewBox="0 0 30 30"
-          className={loading ? "animate-spin" : "animate-none"}
+      <div className="w-full h-fit flex justify-end items-center">
+        <button
+          className="w-fit h-fit py-2 flex justify-end pr-2 hover:fill-green-500 "
+          onClick={() => {
+            fetchData(), setLoading(true);
+          }}
         >
-          <path d="M 15 3 C 8.9134751 3 3.87999 7.5533546 3.1132812 13.439453 A 1.0001 1.0001 0 1 0 5.0957031 13.697266 C 5.7349943 8.7893639 9.9085249 5 15 5 C 17.766872 5 20.250574 6.1285473 22.058594 7.9414062 L 20 10 L 26 11 L 25 5 L 23.470703 6.5292969 C 21.300701 4.3575454 18.309289 3 15 3 z M 25.912109 15.417969 A 1.0001 1.0001 0 0 0 24.904297 16.302734 C 24.265006 21.210636 20.091475 25 15 25 C 11.977904 25 9.2987537 23.65024 7.4648438 21.535156 L 9 20 L 3 19 L 4 25 L 6.0488281 22.951172 C 8.2452659 25.422716 11.436061 27 15 27 C 21.086525 27 26.12001 22.446646 26.886719 16.560547 A 1.0001 1.0001 0 0 0 25.912109 15.417969 z"></path>
-        </svg>
-      </button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            x="0px"
+            y="0px"
+            width="30"
+            height="30"
+            viewBox="0 0 30 30"
+            className={loading ? "animate-spin" : "animate-none"}
+          >
+            <path d="M 15 3 C 8.9134751 3 3.87999 7.5533546 3.1132812 13.439453 A 1.0001 1.0001 0 1 0 5.0957031 13.697266 C 5.7349943 8.7893639 9.9085249 5 15 5 C 17.766872 5 20.250574 6.1285473 22.058594 7.9414062 L 20 10 L 26 11 L 25 5 L 23.470703 6.5292969 C 21.300701 4.3575454 18.309289 3 15 3 z M 25.912109 15.417969 A 1.0001 1.0001 0 0 0 24.904297 16.302734 C 24.265006 21.210636 20.091475 25 15 25 C 11.977904 25 9.2987537 23.65024 7.4648438 21.535156 L 9 20 L 3 19 L 4 25 L 6.0488281 22.951172 C 8.2452659 25.422716 11.436061 27 15 27 C 21.086525 27 26.12001 22.446646 26.886719 16.560547 A 1.0001 1.0001 0 0 0 25.912109 15.417969 z"></path>
+          </svg>
+        </button>
+        <button
+          className="w-fit h-fit py-2 flex justify-end pr-2 hover:fill-green-500 "
+          onClick={(e) => handleDeleteSelected(e)}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            x="0px"
+            y="0px"
+            width="35"
+            height="35"
+            viewBox="0 0 24 24"
+            className="w-fit hover:fill-red-500"
+          >
+            <path d="M 10.806641 2 C 10.289641 2 9.7956875 2.2043125 9.4296875 2.5703125 L 9 3 L 4 3 A 1.0001 1.0001 0 1 0 4 5 L 20 5 A 1.0001 1.0001 0 1 0 20 3 L 15 3 L 14.570312 2.5703125 C 14.205312 2.2043125 13.710359 2 13.193359 2 L 10.806641 2 z M 4.3652344 7 L 5.8925781 20.263672 C 6.0245781 21.253672 6.877 22 7.875 22 L 16.123047 22 C 17.121047 22 17.974422 21.254859 18.107422 20.255859 L 19.634766 7 L 4.3652344 7 z"></path>
+          </svg>
+        </button>
+      </div>
       <hr className="w-full h-1" />
       {tasks.map((item) => (
         <li
@@ -118,6 +174,7 @@ const Card = () => {
         >
           <input
             type="checkbox"
+            onChange={(e) => handleCheckboxChange(e, item._id)}
             className="w-6 h-6 rounded-full border-gray-300 text-blue-600 focus:ring-blue-500"
           />
           <p className="w-full h-full px-4 py-2 rounded-md">{item.task}</p>

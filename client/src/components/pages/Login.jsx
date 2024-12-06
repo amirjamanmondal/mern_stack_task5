@@ -29,8 +29,8 @@ const LoginUser = () => {
       }, 3000);
       localStorage.setItem("sid", res.data?.token);
     } catch (error) {
-      console.error(error.message);
-      toast(error.message);
+      console.error(error);
+      toast("login failed");
     }
     setUsername("");
     setPassword("");
