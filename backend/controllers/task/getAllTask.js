@@ -3,7 +3,7 @@ import TaskModel from "../../models/TaskModel.js";
 async function getAllTask(req, res) {
   try {
     const user = req.user;
-    const tasks = await TaskModel.find({ author: user._id });
+    const tasks = await TaskModel.find({ author: user._id }).sort({ createdAt: -1 });
     if (tasks.length===0) return res.status(404).json({ message: "Task List is empty" });
 
     res.status(200).json({ tasks });
