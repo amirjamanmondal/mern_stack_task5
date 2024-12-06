@@ -39,23 +39,23 @@ const InputCard = () => {
   }
 
   return (
-    <div className="w-1/2 h-fit flex justify-center gap-3">
+    <div className="w-1/2 h-fit flex justify-center gap-3 font-mono">
       <input
         type="text"
         name="task"
         id="task"
         onChange={(e) => setTask(e.target.value)}
-        className="w-2/3 bg-gray-600 px-5 py-3 rounded-md"
+        className="w-2/3 bg-gray-600 px-5 py-3 rounded-md text-lg text-white"
         placeholder="Add a Task..."
       />
       <button
         onClick={(e) => handleCreate(e)}
-        className="w-20 h-12 bg-gray-50 shadow-md rounded-md font-bold hover:bg-blue-400"
+        className="w-fit px-4 py-2 bg-gray-50 shadow-md rounded-md font-bold hover:bg-blue-400 text-lg"
       >
         Add
       </button>
       <button
-        className=" w-fit font-bold bg-white px-2 py-2 rounded-md text-sm hover:bg-red-800"
+        className=" w-fit font-bold bg-white p-2 rounded-md hover:bg-red-800 text-lg"
         onClick={(e) => {
           e.preventDefault(), handleLogout();
         }}
