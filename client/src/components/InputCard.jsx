@@ -25,14 +25,14 @@ const InputCard = () => {
   async function handleCreate(e) {
     e.preventDefault();
     try {
-      const res = await axios.post(
+      await axios.post(
         `http://localhost:8080/user/tasks`,
         {
           task,
         },
         { withCredentials: true }
       );
-      setTask("");
+      setTask(" ");
     } catch (error) {
       console.log(error);
     }
@@ -44,6 +44,7 @@ const InputCard = () => {
         type="text"
         name="task"
         id="task"
+        value={task}
         onChange={(e) => setTask(e.target.value)}
         className="w-2/3 bg-gray-600 px-5 py-3 rounded-md text-lg text-white"
         placeholder="Add a Task..."

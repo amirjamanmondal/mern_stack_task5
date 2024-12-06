@@ -18,7 +18,7 @@ const Home = () => {
       } catch (error) {
         if (!axios.isCancel(error)) {
           console.error("Error fetching tasks:", error);
-          navigate("/login");
+          navigate("/signup");
         }
       }
     }
