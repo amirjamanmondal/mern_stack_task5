@@ -11,7 +11,6 @@ import userRouter from "./router/user.router.js";
 const app = express();
 dotenv.config();
 
-// cors for accessing the api endpoints for limited domain
 app.use(
   cors({
     origin: ["http://localhost:3000", "http://localhost:5173"],
@@ -21,9 +20,7 @@ app.use(
   })
 );
 
-// parse the cookie to client side
 app.use(cookieParser());
-// sessions set for 4 hours
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "your_secret_key",
