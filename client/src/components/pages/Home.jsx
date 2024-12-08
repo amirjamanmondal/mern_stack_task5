@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from "react";
-import Card from "../Card";
+import TodoList from "../TodoList";
 import InputCard from "../InputCard";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -39,7 +39,7 @@ const Home = () => {
 
       <InputCard />
       <hr className="w-1/2 h-1 bg-red-500" />
-      <Card />
+      <TodoList />
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import gear from "../assets/gear.gif";
 import toast from "react-hot-toast";
 
-const Card = () => {
+const TodoList = () => {
   const [tasks, setTasks] = useState(null);
   const [mark, setMark] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -97,16 +97,12 @@ const Card = () => {
     console.log(tasksSelected);
   };
 
-  async function handleDeleteSelected(e) {
-    e.preventDefault();
+  async function handleDeleteSelected() {
     try {
-      const res = await axios.delete(
-        `http://localhost:8080/user/tasks`,
-        { selectedId: tasksSelected },
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.delete("http://localhost:8080/user/tasks", {
+        data: { selectedId: tasksSelected },
+        withCredentials: true,
+      });
       const data = res.data?.message;
       toast(data);
       setTasks((prevTasks) =>
@@ -149,7 +145,7 @@ const Card = () => {
           </button>
           <button
             className="w-fit h-fit py-2 flex justify-end pr-2 hover:fill-green-500 "
-            onClick={(e) => handleDeleteSelected(e)}
+            onClick={(e) => handleDeleteSelected()}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -300,4 +296,4 @@ const Card = () => {
   );
 };
 
-export default Card;
+export default TodoList;
