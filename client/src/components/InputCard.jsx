@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
-const InputCard = () => {
+const TaskInput = () => {
   const [task, setTask] = useState("");
 
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const InputCard = () => {
     } catch (error) {
       if (!axios.isCancel(error)) {
         console.error("Error fetching tasks:", error);
-        setLoading(false);
+        
       }
     }
   }
@@ -67,4 +67,4 @@ const InputCard = () => {
   );
 };
 
-export default InputCard;
+export default TaskInput;
