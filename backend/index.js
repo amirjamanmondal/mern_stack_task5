@@ -8,6 +8,8 @@ import passport from "passport";
 import initializePassport from "./helpers/passportCongig.js";
 import userRouter from "./router/user.router.js";
 
+import GoogleStrategy from 'passport-google-oauth20';
+
 const app = express();
 dotenv.config();
 
@@ -43,6 +45,8 @@ app.use(
 );
 
 initializePassport(passport);
+
+passport.use(new )
 
 app.use("/user", userRouter);
 
